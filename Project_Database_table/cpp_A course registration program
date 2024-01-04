@@ -1,0 +1,84 @@
+sejoon@sejoon-server:~$ mysql -u sejoon -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 8.0.35-0ubuntu0.22.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SHOW DATABASES;
++--------------------------------------+
+| Database                             |
++--------------------------------------+
+| Cpp_Application_for_classes_database |
+| cpp_project                          |
+| information_schema                   |
+| mysql                                |
+| performance_schema                   |
+| sys                                  |
++--------------------------------------+
+6 rows in set (0.01 sec)
+
+mysql> USE cpp_project
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> SHOW TABLES;
++-----------------------+
+| Tables_in_cpp_project |
++-----------------------+
+| admin_table           |
+| course_table          |
+| enroll_table          |
+| student_table         |
++-----------------------+
+4 rows in set (0.00 sec)
+
+mysql> SHOW COLUMNS FROM admin_table;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |   CREATE TABLE admin_table (
++--------------+-------------+------+-----+---------+-------+       professor_id VARCHAR(20) NOT NULL PRIMARY KEY,
+| professor_id | varchar(20) | NO   | PRI | NULL    |       |       username VARCHAR(50),
+| username     | varchar(50) | YES  |     | NULL    |       |       password VARCHAR(50),
+| password     | varchar(50) | YES  |     | NULL    |       |       department VARCHAR(50)
+| department   | varchar(50) | YES  |     | NULL    |       |   );
++--------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> SHOW COLUMNS FROM course_table;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |   CREATE TABLE course_table (
++------------------+-------------+------+-----+---------+-------+       course_id VARCHAR(20) NOT NULL PRIMARY KEY,
+| course_id        | varchar(20) | NO   | PRI | NULL    |       |       course_name VARCHAR(50),
+| course_name      | varchar(50) | YES  |     | NULL    |       |       credit INT,
+| credit           | int         | YES  |     | NULL    |       |       enrollment_limit INT
+| enrollment_limit | int         | YES  |     | NULL    |       |   );
++------------------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> SHOW COLUMNS FROM enroll_table;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |   CREATE TABLE enroll_table (
++------------+-------------+------+-----+---------+-------+       student_id VARCHAR(20) NOT NULL,
+| student_id | varchar(20) | NO   | PRI | NULL    |       |       course_id VARCHAR(20) NOT NULL,
+| course_id  | varchar(20) | NO   | PRI | NULL    |       |       PRIMARY KEY (student_id, course_id)
++------------+-------------+------+-----+---------+-------+   );
+2 rows in set (0.00 sec)
+
+mysql> SHOW COLUMNS FROM student_table;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |   CREATE TABLE student_table (
++------------+-------------+------+-----+---------+-------+       student_id VARCHAR(20) NOT NULL PRIMARY KEY,
+| student_id | varchar(20) | NO   | PRI | NULL    |       |       username VARCHAR(50) NOT NULL,
+| username   | varchar(50) | NO   |     | NULL    |       |       password VARCHAR(50) NOT NULL,
+| password   | varchar(50) | NO   |     | NULL    |       |       department VARCHAR(50) NOT NULL
+| department | varchar(50) | NO   |     | NULL    |       |   );
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
